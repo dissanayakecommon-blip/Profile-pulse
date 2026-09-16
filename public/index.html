@@ -248,7 +248,13 @@
       } catch (error) {
         content.innerHTML = `
           <div class="error">
-            We couldn't load your Instagram data right now. Please try again.
+            } catch (error) {
+  content.innerHTML = `
+    <div class="error">
+      Error: ${error.message}
+    </div>
+  `;
+}
           </div>
         `;
       }
