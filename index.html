@@ -1,86 +1,261 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#090a18">
-<link rel="manifest" href="./manifest.webmanifest">
-<link rel="icon" href="./icons/icon-192.png" type="image/png">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Profile Pulse">
-<link rel="apple-touch-icon" href="./icons/icon-192.png">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<title>Profile Pulse</title>
-<style>
-:root{--bg:#070814;--panel:#111329;--panel2:#171936;--text:#f8f5ff;--muted:#aaa8c5;--purple:#a977ff;--pink:#ff78c8;--cyan:#65e6da;--line:#2a2b4b;--danger:#ff8ca8}
-*{box-sizing:border-box}html{background:#050611}body{margin:0;background:#050611;color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}.app{max-width:430px;min-height:100vh;margin:auto;background:radial-gradient(circle at 50% -10%,#2b2350 0,#0c0d20 34%,#070813 72%);overflow:hidden;position:relative}button{font:inherit;color:inherit;border:0}.topbar{padding:18px 18px 8px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:4;background:linear-gradient(#0b0c1dcc,#0b0c1d00);backdrop-filter:blur(10px)}.brand{font-weight:850;font-size:20px;letter-spacing:-.6px}.brand span{color:var(--pink)}.icon{width:38px;height:38px;border-radius:13px;background:#171832;border:1px solid var(--line);display:grid;place-items:center;cursor:pointer}.main{padding:10px 16px 100px}.screen{display:none}.screen.active{display:block;animation:fade .2s ease}@keyframes fade{from{opacity:.4;transform:translateY(4px)}to{opacity:1;transform:none}}
-.hero{text-align:center;padding:34px 10px 20px}.eye{font-size:68px;filter:drop-shadow(0 0 22px #a977ff88);animation:float 3s ease-in-out infinite}@keyframes float{50%{transform:translateY(-5px)}}.hero h1{font-size:34px;line-height:1;margin:8px 0 10px;letter-spacing:-1.3px}.hero h1 span{color:var(--pink)}.hero p{color:var(--muted);line-height:1.55;margin:0 auto;max-width:330px}.card{background:linear-gradient(145deg,rgba(24,25,51,.97),rgba(12,14,31,.97));border:1px solid var(--line);border-radius:20px;padding:16px;margin:12px 0;box-shadow:0 12px 34px #0005}.feature{display:flex;gap:11px;align-items:center;padding:11px 0;border-bottom:1px solid #252640}.feature:last-child{border-bottom:0}.feature b{font-size:13px}.feature small{display:block;color:var(--muted);margin-top:2px}.check{margin-left:auto;color:var(--cyan)}.cta{width:100%;padding:15px;border-radius:16px;background:linear-gradient(100deg,#9667ff,#ff78c8);font-weight:850;cursor:pointer;box-shadow:0 10px 28px #9c69ff30}.secondary{width:100%;padding:13px;border-radius:15px;background:#171932;border:1px solid var(--line);cursor:pointer}.safe{font-size:11px;color:#9f9bb8;margin:14px 4px 18px}.profile{display:flex;gap:12px;align-items:center;margin:10px 0 18px}.avatar{width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,#6d4d9e,#d5b7ff);display:grid;place-items:center;font-size:25px;border:2px solid #8e63d8}.name{font-weight:800}.handle{color:var(--muted);font-size:13px;margin-top:3px}.sync{margin-left:auto;font-size:10px;color:var(--cyan);background:#102b2a;border:1px solid #1f5d58;padding:6px 8px;border-radius:999px}.sub{color:var(--muted);font-size:13px}.sectionline{display:flex;justify-content:space-between;align-items:end;margin:7px 0 9px}.sectionline b{font-size:12px;letter-spacing:.6px;color:#c7c3dd}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat{padding:14px;border-radius:17px;background:#0c0e22;border:1px solid #252744}.stat .num{font-size:24px;font-weight:850;margin:7px 0 2px}.stat small{color:var(--muted);font-size:11px}.up{color:var(--cyan);font-size:11px;margin-top:5px}.spark{height:4px;background:#292b48;border-radius:99px;margin-top:10px;overflow:hidden}.spark i{display:block;height:100%;background:linear-gradient(90deg,var(--cyan),var(--purple));border-radius:99px}.notice{display:flex;gap:10px;align-items:flex-start;background:#1b1738;border:1px solid #4b3d73;padding:12px;border-radius:15px;font-size:12px;color:#d7d2ed;margin-top:12px}.notice b{color:#fff}.pillrow{display:flex;gap:7px;overflow:auto;margin:13px 0}.pill{white-space:nowrap;padding:8px 13px;border-radius:999px;background:#11132c;border:1px solid var(--line);font-size:12px;cursor:pointer}.pill.on{background:linear-gradient(90deg,#7d55db,#bc7cff);border-color:#b78cff}.person{display:flex;align-items:center;gap:11px;padding:12px 0;border-bottom:1px solid #242640}.person:last-child{border-bottom:0}.mini{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#4d4b75,#b78cff);flex:none}.grow{flex:1;min-width:0}.person b{font-size:14px}.person small{display:block;color:var(--muted);margin-top:3px;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.confidence{font-size:10px;color:var(--cyan)}h2{font-size:24px;margin:8px 0 4px;letter-spacing:-.5px}.back{display:flex;align-items:center;gap:8px;margin:4px 0 18px;font-size:14px;color:#d5d0e6;cursor:pointer}.detail{display:flex;justify-content:space-between;gap:12px;padding:10px 0;font-size:13px;border-bottom:1px solid #242640}.detail:last-child{border-bottom:0}.detail span:last-child{color:#ded9f3;text-align:right}.chart{height:165px;padding:15px 4px 0}.bars{height:125px;display:flex;align-items:end;gap:8px}.bar{flex:1;background:linear-gradient(#bc7cff,#6244a9);border-radius:8px 8px 2px 2px;min-height:15px;transition:height .5s}.labels{display:flex;gap:8px;color:#777692;font-size:9px;margin-top:7px}.labels span{flex:1;text-align:center}.confidencebar{height:8px;background:#292b48;border-radius:8px;margin:12px 0;overflow:hidden}.confidencebar i{display:block;height:100%;width:76%;background:linear-gradient(90deg,var(--cyan),var(--purple));border-radius:8px}.bottom{position:fixed;bottom:0;left:50%;transform:translateX(-50%);max-width:430px;width:100%;height:74px;background:rgba(8,9,23,.94);backdrop-filter:blur(16px);border-top:1px solid #252640;display:flex;justify-content:space-around;padding:8px 6px 12px;z-index:5}.nav{background:none;display:flex;flex-direction:column;align-items:center;gap:4px;color:#77758f;font-size:10px;cursor:pointer}.nav .ni{font-size:20px}.nav.on{color:#bc8bff}.toast{position:fixed;bottom:88px;left:50%;transform:translate(-50%,20px);background:#242641;border:1px solid #4b4d72;padding:11px 14px;border-radius:12px;font-size:12px;opacity:0;pointer-events:none;transition:.25s;z-index:9;white-space:nowrap}.toast.show{opacity:1;transform:translate(-50%,0)}.modal{position:fixed;inset:0;background:#050611aa;backdrop-filter:blur(9px);z-index:20;display:none;align-items:end}.modal.open{display:flex}.sheet{width:100%;max-width:430px;margin:auto;background:#101226;border:1px solid var(--line);border-bottom:0;border-radius:24px 24px 0 0;padding:18px;box-shadow:0 -20px 50px #0008}.grab{width:42px;height:4px;background:#454763;border-radius:99px;margin:0 auto 16px}.sheet h3{margin:0 0 7px;font-size:20px}.sheet p{color:var(--muted);font-size:13px;line-height:1.55}.status{display:flex;gap:9px;align-items:center;padding:11px 0}.dot{width:9px;height:9px;border-radius:50%;background:var(--cyan);box-shadow:0 0 12px #65e6da88}.badge{display:inline-flex;align-items:center;gap:6px;padding:7px 9px;border-radius:999px;background:#161832;border:1px solid var(--line);font-size:10px;color:#c9c5df}.mutedline{color:#77758f;font-size:11px;line-height:1.5}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile Pulse ✦</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #fff7fb, #f8f3ff, #f1f8ff);
+      color: #332c3d;
+    }
+
+    .page {
+      width: min(920px, 92%);
+      margin: 0 auto;
+      padding: 50px 0;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+
+    .sparkle {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 42px;
+      letter-spacing: -1px;
+    }
+
+    .subtitle {
+      margin-top: 10px;
+      color: #82758d;
+      font-size: 16px;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 18px;
+      padding: 9px 16px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.75);
+      border: 1px solid #eee4f3;
+      font-size: 13px;
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #7bc99b;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-bottom: 22px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.82);
+      border: 1px solid rgba(235,225,241,0.9);
+      border-radius: 24px;
+      padding: 25px;
+      box-shadow: 0 12px 35px rgba(92, 68, 110, 0.08);
+    }
+
+    .card-icon {
+      font-size: 25px;
+      margin-bottom: 14px;
+    }
+
+    .label {
+      font-size: 13px;
+      color: #8a7d94;
+      margin-bottom: 7px;
+    }
+
+    .value {
+      font-size: 27px;
+      font-weight: 700;
+    }
+
+    .profile-card {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background: rgba(255,255,255,0.84);
+      border: 1px solid rgba(235,225,241,0.9);
+      border-radius: 24px;
+      padding: 26px;
+      box-shadow: 0 12px 35px rgba(92, 68, 110, 0.08);
+    }
+
+    .avatar {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #ffd9ea, #e5dcff);
+      font-size: 30px;
+      flex-shrink: 0;
+    }
+
+    .profile-name {
+      font-size: 21px;
+      font-weight: 700;
+    }
+
+    .profile-id {
+      margin-top: 6px;
+      color: #92869c;
+      font-size: 12px;
+      word-break: break-all;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 32px;
+      color: #9a8fa2;
+      font-size: 12px;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 40px;
+      color: #887b91;
+    }
+
+    .error {
+      background: #fff1f4;
+      border: 1px solid #f2d6dd;
+      color: #9b5265;
+      padding: 18px;
+      border-radius: 18px;
+      text-align: center;
+    }
+
+    @media (max-width: 700px) {
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 34px;
+      }
+
+      .page {
+        padding: 35px 0;
+      }
+    }
+  </style>
 </head>
+
 <body>
-<div class="app">
-<header class="topbar"><div class="brand">👁️ Profile <span>Pulse</span></div><button class="icon" onclick="go('settings')" aria-label="Settings">⚙️</button></header>
-<main class="main">
-<section id="welcome" class="screen active">
-  <div class="hero"><div class="eye">👁️</div><h1>Profile <span>Pulse</span></h1><p>Your Instagram activity, turned into clean, understandable insights.</p></div>
-  <div class="card">
-    <div class="feature"><span>👤</span><div><b>Visible activity</b><small>Organize the signals Instagram actually exposes.</small></div><span class="check">✓</span></div>
-    <div class="feature"><span>💗</span><div><b>Engagement patterns</b><small>Likes, comments and story interactions.</small></div><span class="check">✓</span></div>
-    <div class="feature"><span>📊</span><div><b>Transparent estimates</b><small>Potential interest is never presented as fact.</small></div><span class="check">✓</span></div>
-  </div>
-  <p class="safe">🔒 No Instagram password collection. This demo uses sample data until a real Meta connection is configured.</p>
-  <button class="cta" onclick="go('home')">Enter Dashboard →</button>
-</section>
 
-<section id="home" class="screen">
-  <div class="profile"><div class="avatar">🌙</div><div><div class="name">minduli.luxe</div><div class="handle">Minduli • Demo account</div></div><div class="sync">● Demo</div></div>
-  <div class="sectionline"><b>YOUR ACTIVITY</b><span class="sub">Last 7 days</span></div>
-  <div class="grid">
-    <div class="stat">👁️<div class="num">12</div><small>Estimated interest</small><div class="up">↑ 23%</div><div class="spark"><i style="width:72%"></i></div></div>
-    <div class="stat">💗<div class="num">5</div><small>Frequent interactions</small><div class="up">↑ 11%</div><div class="spark"><i style="width:54%"></i></div></div>
-    <div class="stat">👥<div class="num">8</div><small>Recent engagers</small><div class="up">↑ 18%</div><div class="spark"><i style="width:66%"></i></div></div>
-    <div class="stat">📊<div class="num">7.8</div><small>Activity score</small><div class="up">Stable</div><div class="spark"><i style="width:78%"></i></div></div>
-  </div>
-  <div class="card" onclick="go('activity')" style="cursor:pointer"><b>✨ Explore potential interest</b><div class="sub" style="margin-top:6px">See which visible signals contributed to each estimate →</div></div>
-  <div class="notice">ⓘ <div>These are <b>estimates</b>. A name here does not prove that person visited your profile.</div></div>
-</section>
+  <main class="page">
 
-<section id="activity" class="screen"><div class="back" onclick="go('home')">‹ Back</div><h2>Profile Activity</h2><div class="sub">Potential interest, not confirmed visitors.</div><div class="pillrow"><button class="pill on">Potential Interest</button><button class="pill">Recent Activity</button><button class="pill">All Signals</button></div><div class="card" id="people"></div><div class="mutedline">The estimate is built from visible, permitted activity signals. It is not a hidden visitor log.</div></section>
+    <section class="hero">
+      <div class="sparkle">✦ ♡ ✦</div>
+      <h1>Profile Pulse</h1>
+      <div class="subtitle">Your Instagram, softly decoded.</div>
 
-<section id="detail" class="screen"><div class="back" onclick="go('activity')">‹ Profile Activity</div><div class="profile"><div class="avatar">✨</div><div><div class="name" id="detailName">@mystic.skies</div><div class="handle">Potentially interested</div></div></div><div class="card"><div class="detail"><span>💗 Visible likes</span><span>2×</span></div><div class="detail"><span>💬 Comments</span><span>1×</span></div><div class="detail"><span>📸 Story interactions</span><span>Available when exposed</span></div><div class="detail"><span>👥 Follow relationship</span><span>Not following</span></div><div class="detail"><span>🕒 Last visible interaction</span><span>2 days ago</span></div></div><div class="card"><b>Estimate strength</b><div class="confidencebar"><i></i></div><span class="confidence">Moderate confidence</span></div><div class="notice">✨ This estimate is based on available activity signals. It does not confirm a profile visit.</div></section>
+      <div class="status">
+        <span class="dot"></span>
+        Instagram connected
+      </div>
+    </section>
 
-<section id="engagement" class="screen"><h2>Engagement</h2><div class="sub">Your strongest visible interactions.</div><div class="pillrow"><button class="pill on">Likes</button><button class="pill">Comments</button><button class="pill">Story interactions</button></div><div class="card"><b>Top Engagers</b><div id="engagers"></div></div><div class="card"><b>Engagement Trend</b><div class="chart"><div class="bars"><div class="bar" style="height:28%"></div><div class="bar" style="height:42%"></div><div class="bar" style="height:56%"></div><div class="bar" style="height:48%"></div><div class="bar" style="height:74%"></div><div class="bar" style="height:69%"></div><div class="bar" style="height:88%"></div></div><div class="labels"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span></div></div></div></section>
+    <section id="content">
+      <div class="loading">Loading your Instagram profile... ✦</div>
+    </section>
 
-<section id="story" class="screen"><h2>Story Insights</h2><div class="sub">Story viewer data is kept separate from estimates.</div><div class="card"><div class="detail"><span>👁️ Latest story views</span><span>48</span></div><div class="detail"><span>💗 Reactions</span><span>7</span></div><div class="detail"><span>💬 Replies</span><span>4</span></div></div><div class="card"><b>Recent Story Viewers</b><div id="storyPeople"></div></div></section>
+    <div class="footer">
+      Profile Pulse · Instagram insights dashboard
+    </div>
 
-<section id="analytics" class="screen"><h2>Analytics</h2><div class="pillrow"><button class="pill on">7 Days</button><button class="pill">30 Days</button><button class="pill">90 Days</button></div><div class="card"><b>Overall Activity</b><div class="chart"><div class="bars" id="activityBars"></div><div class="labels"><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span></div></div></div><div class="card"><b>Key Insights</b><div class="detail"><span>✨ Profile interest</span><span>↑ 23%</span></div><div class="detail"><span>💗 Post likes</span><span>↑ 18%</span></div><div class="detail"><span>📸 Story views</span><span>↑ 32%</span></div></div></section>
+  </main>
 
-<section id="notifications" class="screen"><h2>Notifications</h2><div class="pillrow"><button class="pill on">All</button><button class="pill">Likes</button><button class="pill">Comments</button><button class="pill">Story Views</button></div><div class="card" id="notifs"></div></section>
+  <script>
+    async function loadProfile() {
+      const content = document.getElementById("content");
 
-<section id="settings" class="screen"><h2>Settings</h2><div class="profile"><div class="avatar">🌙</div><div><div class="name">minduli.luxe</div><div class="handle">Demo connection</div></div></div><div class="card"><div class="detail"><span>🔗 Instagram connection</span><span>Demo</span></div><div class="detail"><span>🔒 Privacy & Security</span><span>Protected</span></div><div class="detail"><span>🔔 Notifications</span><span>On</span></div><div class="detail"><span>📱 App version</span><span>1.1</span></div></div><button class="cta" onclick="openConnect()">Connect Instagram</button><div style="height:8px"></div><button class="secondary" onclick="toast('Demo data refreshed ✨')">Refresh demo data</button></section>
-</main>
-<nav class="bottom"><button class="nav on" data-go="home"><span class="ni">🏠</span>Home</button><button class="nav" data-go="activity"><span class="ni">👁️</span>Activity</button><button class="nav" data-go="engagement"><span class="ni">💗</span>Engagement</button><button class="nav" data-go="analytics"><span class="ni">📊</span>Analytics</button><button class="nav" data-go="settings"><span class="ni">☰</span>More</button></nav>
-<div class="toast" id="toast"></div>
-<div class="modal" id="connectModal" onclick="closeConnect(event)"><div class="sheet" onclick="event.stopPropagation()"><div class="grab"></div><h3>Connect Instagram</h3><p>Profile Pulse is ready for a real connection, but the final OAuth step needs your own Meta developer app credentials.</p><div class="status"><span class="dot"></span><div><b>Demo mode is active</b><div class="mutedline">No password is requested or stored.</div></div></div><div class="badge">🔐 OAuth via Meta</div> <div class="badge">🛡️ Server-side secrets</div><div style="height:14px"></div><button class="cta" onclick="toast('OAuth setup is the next step 🔗');closeConnect()">Continue with setup</button><div style="height:8px"></div><button class="secondary" onclick="closeConnect()">Not now</button></div></div>
-<script>
-const people=[['mystic.skies','✨','2d ago','High'],['luvly.ria','🌸','3d ago','Moderate'],['tharu__xx','🌙','4d ago','Moderate'],['__choco.bae','🍫','5d ago','Low'],['sene_en','🪐','6d ago','Low']];
-const eng=[['fairy.vibes','12 likes'],['choco.latte','9 likes'],['_sena_','7 likes'],['cloudy.riya','5 likes'],['tharu__xx','4 likes']];
-function rows(){
- document.getElementById('people').innerHTML=people.map(p=>`<div class="person" onclick="openDetail('${p[0]}')"><div class="mini">${p[1]}</div><div class="grow"><b>@${p[0]}</b><small>Potentially interested • ${p[2]}</small></div><div class="confidence">${p[3]}</div></div>`).join('');
- document.getElementById('engagers').innerHTML=eng.map(p=>`<div class="person"><div class="mini">♡</div><div class="grow"><b>@${p[0]}</b><small>${p[1]}</small></div><span>💗</span></div>`).join('');
- document.getElementById('storyPeople').innerHTML=people.slice(0,4).map(p=>`<div class="person"><div class="mini">${p[1]}</div><div class="grow"><b>@${p[0]}</b><small>Viewed your story • ${p[2]}</small></div></div>`).join('');
- document.getElementById('notifs').innerHTML=`<div class="person"><div class="mini">💗</div><div class="grow"><b>@luvly.ria</b><small>liked your post • 2h ago</small></div></div><div class="person"><div class="mini">💬</div><div class="grow"><b>@__choco.bae</b><small>commented on your post • 4h ago</small></div></div><div class="person"><div class="mini">👁️</div><div class="grow"><b>@mystic.skies</b><small>viewed your story • 5h ago</small></div></div>`;
- document.getElementById('activityBars').innerHTML=[30,48,52,57,63,70,91].map(h=>`<div class="bar" style="height:${h}%"></div>`).join('');
-}
-function go(id){document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.nav').forEach(x=>x.classList.toggle('on',x.dataset.go===id));window.scrollTo({top:0,behavior:'smooth'});}
-function openDetail(name){document.getElementById('detailName').textContent='@'+name;go('detail')}
-function toast(t){const x=document.getElementById('toast');x.textContent=t;x.classList.add('show');setTimeout(()=>x.classList.remove('show'),1900)}
-function openConnect(){document.getElementById('connectModal').classList.add('open')}
-function closeConnect(e){if(!e||e.target.id==='connectModal')document.getElementById('connectModal').classList.remove('open')}
-document.querySelectorAll('.nav').forEach(x=>x.onclick=()=>go(x.dataset.go));
-rows();
-if('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js').catch(()=>{});
-</script>
-</div>
+      try {
+        const response = await fetch("/api/insights");
+        const result = await response.json();
+
+        if (!response.ok || !result.instagram) {
+          throw new Error("Instagram data could not be loaded.");
+        }
+
+        const instagram = result.instagram;
+
+        const username = instagram.username || "Instagram User";
+        const followers = instagram.followers_count ?? "—";
+        const media = instagram.media_count ?? "—";
+        const id = instagram.id || "Unavailable";
+
+        content.innerHTML = `
+          <section class="card-grid">
+
+            <div class="card">
+              <div class="card-icon">♡</div>
+              <div class="label">Followers</div>
+              <div class="value">${followers}</div>
+            </div>
+
+            <div class="card">
+              <div class="card-icon">▣</div>
+              <div class="label">Posts</div>
+              <div class="value">${media}</div>
+            </div>
+
+            <div class="card">
+              <div class="card-icon">✦</div>
+              <div class="label">Connection</div>
+              <div class="value">Live</div>
+            </div>
+
+          </section>
+
+          <section class="profile-card">
+            <div class="avatar">♡</div>
+
+            <div>
+              <div class="profile-name">@${username}</div>
+              <div class="profile-id">Instagram ID: ${id}</div>
+            </div>
+          </section>
+        `;
+
+      } catch (error) {
+        content.innerHTML = `
+          <div class="error">
+            We couldn't load your Instagram data right now. Please try again.
+          </div>
+        `;
+      }
+    }
+
+    loadProfile();
+  </script>
+
 </body>
 </html>
