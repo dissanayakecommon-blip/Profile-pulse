@@ -1,1 +1,9 @@
-{"$schema":"https://developers.cloudflare.com/workers/wrangler/config-schema.json","name":"profile-pulse","main":"src/worker.js","compatibility_date":"2026-09-16"}
+{
+  "$schema": "https://developers.cloudflare.com/workers/wrangler/config-schema.json",
+  "name": "profile-pulse",
+  "main": "src/worker.js",
+  "compatibility_date": "2026-09-16",
+  "assets": {
+    "directory": "."
+  }
+}
