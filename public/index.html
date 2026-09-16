@@ -1,1 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile Pulse ✦</title>
 
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #fff7fb, #f8f3ff, #f1f8ff);
+      color: #332c3d;
+    }
+
+    .page {
+      width: min(920px, 92%);
+      margin: 0 auto;
+      padding: 50px 0;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+
+    .sparkle {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 42px;
+      letter-spacing: -1px;
+    }
+
+    .subtitle {
+      margin-top: 10px;
+      color: #82758d;
+      font-size: 16px;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 18px;
+      padding: 9px 16px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.75);
+      border: 1px solid #eee4f3;
+      font-size: 13px;
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #7bc99b;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-bottom: 22px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.82);
+      border: 1px solid rgba(235,225,241,0.9);
+      border-radius: 24px;
+      padding: 25px;
+      box-shadow: 0 12px 35px rgba(92, 68, 110, 0.08);
+    }
+
+    .card-icon {
+      font-size: 25px;
+      margin-bottom: 14px;
+    }
+
+    .label {
+      font-size: 13px;
+      color: #8a7d94;
+      margin-bottom: 7px;
+    }
+
+    .value {
+      font-size: 27px;
+      font-weight: 700;
+    }
+
+    .profile-card {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background: rgba(255,255,255,0.84);
+      border: 1px solid rgba(235,225,241,0.9);
+      border-radius: 24px;
+      padding: 26px;
+      box-shadow: 0 12px 35px rgba(92, 68, 110, 0.08);
+    }
+
+    .avatar {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #ffd9ea, #e5dcff);
+      font-size: 30px;
+      flex-shrink: 0;
+    }
+
+    .profile-name {
+      font-size: 21px;
+      font-weight: 700;
+    }
+
+    .profile-id {
+      margin-top: 6px;
+      color: #92869c;
+      font-size: 12px;
+      word-break: break-all;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 32px;
+      color: #9a8fa2;
+      font-size: 12px;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 40px;
+      color: #887b91;
+    }
+
+    .error {
+      background: #fff1f4;
+      border: 1px solid #f2d6dd;
+      color: #9b5265;
+      padding: 18px;
+      border-radius: 18px;
+      text-align: center;
+    }
+
+    @media (max-width: 700px) {
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 34px;
+      }
+
+      .page {
+        padding: 35px 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="page">
+
+    <section class="hero">
+      <div class="sparkle">✦ ♡ ✦</div>
+      <h1>Profile Pulse</h1>
+      <div class="subtitle">Your Instagram, softly decoded.</div>
+
+      <div class="status">
+        <span class="dot"></span>
+        Instagram connected
+      </div>
+    </section>
+
+    <section id="content">
+      <div class="loading">Loading your Instagram profile... ✦</div>
+    </section>
+
+    <div class="footer">
+      Profile Pulse · Instagram insights dashboard
+    </div>
+
+  </main>
+
+  <script>
+    async function loadProfile() {
+      const content = document.getElementById("content");
+
+      try {
+        const response = await fetch("/api/insights");
+        const result = await response.json();
+
+        if (!response.ok || !result.instagram) {
+          throw new Error("Instagram data could not be loaded.");
+        }
+
+        const instagram = result.instagram;
+
+        const username = instagram.username || "Instagram User";
+        const followers = instagram.followers_count ?? "—";
+        const media = instagram.media_count ?? "—";
+        const id = instagram.id || "Unavailable";
+
+        content.innerHTML = `
+          <section class="card-grid">
+
+            <div class="card">
+              <div class="card-icon">♡</div>
+              <div class="label">Followers</div>
+              <div class="value">${followers}</div>
+            </div>
+
+            <div class="card">
+              <div class="card-icon">▣</div>
+              <div class="label">Posts</div>
+              <div class="value">${media}</div>
+            </div>
+
+            <div class="card">
+              <div class="card-icon">✦</div>
+              <div class="label">Connection</div>
+              <div class="value">Live</div>
+            </div>
+
+          </section>
+
+          <section class="profile-card">
+            <div class="avatar">♡</div>
+
+            <div>
+              <div class="profile-name">@${username}</div>
+              <div class="profile-id">Instagram ID: ${id}</div>
+            </div>
+          </section>
+        `;
+
+      } catch (error) {
+        content.innerHTML = `
+          <div class="error">
+            We couldn't load your Instagram data right now. Please try again.
+          </div>
+        `;
+      }
+    }
+
+    loadProfile();
+  </script>
+
+</body>
