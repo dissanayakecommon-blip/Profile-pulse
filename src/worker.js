@@ -4,5 +4,20 @@ export default { async fetch(request, env) { const url=new URL(request.url); if(
 }
 if(url.pathname==="/auth/data-deletion" && request.method==="POST"){
   return json({url:"https://profile-pulse.dissanayakecommon.workers.dev",confirmation_code:"profile-pulse-deletion"});
-    }if(url.pathname==="/api/insights") const token = env.INSTAGRAM_ACCESS_TOKEN;
-return json({mode:"instagram",tokenConfigured:!!token}); return json({error:"Not found"},404); } }; function cors(){return {"Access-Control-Allow-Origin":"*","Access-Control-Allow-Methods":"GET,POST,OPTIONS","Access-Control-Allow-Headers":"Content-Type,Authorization"}} function json(d,s=200){return new Response(JSON.stringify(d,null,2),{status:s,headers:{"content-type":"application/json;charset=utf-8",...cors()}})}
+    }if(url.pathname==="/api/insights"){
+  const token = env.INSTAGRAM_ACCESS_TOKEN;
+  const instagramId = "17841463531948420";
+
+  const response = await fetch(
+    `https://graph.instagram.com/${instagramId}?fields=id,username,followers_count,media_count&access_token=${token}`
+  );
+
+  const data = await response.json();
+
+  return json({
+    mode:"instagram",
+    instagram:data
+  });
+}
+
+return json({error:"Not found"},404); } }; function cors(){return {"Access-Control-Allow-Origin":"*","Access-Control-Allow-Methods":"GET,POST,OPTIONS","Access-Control-Allow-Headers":"Content-Type,Authorization"}} function json(d,s=200){return new Response(JSON.stringify(d,null,2),{status:s,headers:{"content-type":"application/json;charset=utf-8",...cors()}})}
